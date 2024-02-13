@@ -1,0 +1,7 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/el_db
+    username: el_db_user
+    password: P@ssword
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.sql
