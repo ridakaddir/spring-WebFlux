@@ -1,4 +1,4 @@
-package com.ridakaddir.backend.campaign;
+package com.ridakaddir.backend.domain.campaign;
 
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;

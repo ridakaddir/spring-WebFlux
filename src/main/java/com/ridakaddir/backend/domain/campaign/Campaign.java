@@ -1,4 +1,4 @@
-package com.ridakaddir.backend.campaign;
+package com.ridakaddir.backend.domain.campaign;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
