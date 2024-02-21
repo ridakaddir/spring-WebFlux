@@ -1,30 +1,22 @@
 package com.ridakaddir.backend.domain.campaign;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Table("campaigns")
 public class Campaign {
+    private BudgetValueObject budget;
+    private StartDateValueObject startDate;
+    private EndDateValueObject endDate;
+    private RewardPercentValueObject reward;
 
-    @Id
-    private Long id;
-     private String name;
-     private String description;
-     private String targetAudience;
-     private Long budget;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-     private LocalDateTime startDate;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-     private LocalDateTime endDate;
+    public Integer calculateReward(Transaction transaction) throws InvalidTransactionDateException {
+        if (transaction.amount() > budget.value()) {
+            return budget.value();
+        }
+        if (transaction.date().isBefore(startDate.date()) || transaction.date().isAfter(endDate.date())) {
+            throw new InvalidTransactionDateException("Transaction date is not within the campaign date range.");
+        }
+        return (int) (transaction.amount() * this.reward.value());
+    }
+
 }

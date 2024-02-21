@@ -1,4 +1,4 @@
-package com.ridakaddir.backend.domain.campaign;
+package com.ridakaddir.backend.application.usecase.campaign;
 
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
