@@ -1,9 +1,12 @@
-package com.ridakaddir.backend.domain.campaign;
+package com.ridakaddir.backend.application.usecase.campaign;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @RestController
 public class CampaignController {
     final CampaignService campaignService;
@@ -17,8 +20,10 @@ public class CampaignController {
     }
 
     @GetMapping("/campaigns/{id}")
-    public Campaign getCampaignById(@PathVariable Long id) {
-        return campaignService.getCampaignById(id).block();
+    public Mono<Campaign> getCampaignById(@PathVariable Long id) {
+        log.info("Getting campaign by id: " + id);
+        StringUtils.hasText("test");
+        return campaignService.getCampaignById(id);
     }
 
     @PostMapping("/campaigns")

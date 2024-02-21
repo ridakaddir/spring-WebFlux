@@ -1,4 +1,4 @@
-package com.ridakaddir.backend.security;
+package com.ridakaddir.backend.application.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
