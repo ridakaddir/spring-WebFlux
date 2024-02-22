@@ -10,3 +10,18 @@ spring:
     password: P@ssword
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.sql
+
+#otel:
+#  exporter:
+#    otlp:
+#      endpoint: "http://localhost:4317"
+#      traces:
+#        protocol: grpc
+#      metrics:
+#        protocol: grpc
+#      logs:
+#        protocol: grpc
+#
+#  traces:
+#    sampler:
+#      probability: 1.0
