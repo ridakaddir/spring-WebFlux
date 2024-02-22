@@ -12,6 +12,10 @@ exporters:
     loglevel: debug
   prometheus:
     endpoint: "0.0.0.0:8889"
+  otlp:
+    endpoint: tempo:4317 # tempo container host & port
+    tls:
+      insecure: true
 #  file:
 #    path: "./opentelemetry-collector-contrib.log"
 service:
@@ -23,7 +27,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging]
+      exporters: [logging, otlp]
     logs:
       receivers: [otlp]
       processors: [batch]

@@ -43,7 +43,14 @@ services:
         - "4317:4317" # OTLP receiver
         - "4318:4318" # OTLP receiver
         - "8889:8889" # Prometheus exporter metrics
-
+  tempo:
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yml" ]
+    ports:
+      - "3200:3200"
+      - "4317"
+    volumes:
+      - ./tempo.yml:/etc/tempo.yml
 volumes:
   my-datavolume:
   postgres_data:
