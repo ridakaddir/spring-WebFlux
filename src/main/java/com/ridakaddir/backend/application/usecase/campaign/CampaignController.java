@@ -3,6 +3,7 @@ package com.ridakaddir.backend.application.usecase.campaign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -10,8 +11,10 @@ import reactor.core.publisher.Mono;
 @RestController
 public class CampaignController {
     final CampaignService campaignService;
-    public CampaignController(CampaignService campaignService) {
+    final WebClient webClient;
+    public CampaignController(CampaignService campaignService, WebClient.Builder webClientBuilder) {
         this.campaignService = campaignService;
+        this.webClient = webClientBuilder.build();
     }
 
     @GetMapping("/campaigns")
@@ -29,6 +32,15 @@ public class CampaignController {
     @PostMapping("/campaigns")
     public Mono<Campaign> createCampaign(@RequestBody Campaign campaign) {
         return campaignService.createCampaign(campaign);
+    }
+
+    @GetMapping("/test")
+    public Mono<String> test() {
+        // call this rest API https://jsonplaceholder.typicode.com/todos/1
+        return webClient.get()
+                .uri("https://jsonplaceholder.typicode.com/todos/1")
+                .retrieve()
+                .bodyToMono(String.class);
     }
 
 }
